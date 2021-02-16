@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "MultipleBeStackDeployer",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:*",
+                "logs:*",
+                "s3:*",
+                "xray:*",
+                "apigateway:*",
+                "cloudformation:*",
+                "events:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "multiple-be-stack",
+  "version": "1.0.0",
+  "description": "MultipleBeStack project builds an application using node and python as BE.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/PalituxD/multiple-be-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/PalituxD/multiple-be-api#readme",
+  "devDependencies": {
+    "serverless": "^2.4.0"
+  }
+}

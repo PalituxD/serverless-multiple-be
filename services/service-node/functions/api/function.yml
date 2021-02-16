@@ -1,0 +1,12 @@
+service-node:
+  handler: functions/api/lambda_function.handler
+  package:
+    individually: True
+    include:
+      - functions/api/lambda_function.js
+    exclude:
+      - ./**
+  events:
+    - http:
+        method: GET
+        path: /node

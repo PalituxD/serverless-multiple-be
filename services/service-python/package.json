@@ -1,0 +1,23 @@
+{
+  "name": "multiple-be-service-python",
+  "version": "1.0.0",
+  "description": "MultipleBeStack project builds an application using node and python as BE.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/PalituxD/multiple-be-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/PalituxD/multiple-be-api#readme",
+  "dependencies": {
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-plugin-tracing": "^2.0.0",
+    "serverless-prune-plugin": "^1.4.3",
+    "serverless-pseudo-parameters": "^2.5.0"
+  }
+}

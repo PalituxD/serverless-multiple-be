@@ -1,0 +1,29 @@
+service: service-node
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  timeout: 3
+  stage: ${self:custom.common.currentStage}
+  logRetentionInDays: 30
+  tracing:
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - ${file(../../shared/serverless.common.yml):lambdaPolicyXRay}
+    - ${file(../../shared/serverless.common.yml):lambdaLogGroup}
+  apiGateway:
+    restApiId: !ImportValue ${self:custom.common.currentStage}-MultipleBeRestApiId
+    restApiRootResourceId: !ImportValue ${self:custom.common.currentStage}-MultipleBeRestApiRootResourceId
+package:
+  individually: true
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-pseudo-parameters
+  - serverless-prune-plugin
+custom:
+  common: ${file(../../shared/serverless.common.yml):common}
+  serverless-iam-roles-per-function:
+    defaultInherit: true
+functions:
+  - ${file(./functions/api/function.yml)}

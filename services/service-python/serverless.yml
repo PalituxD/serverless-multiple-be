@@ -1,0 +1,43 @@
+service: service-python
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 128
+  timeout: 15
+  stage: ${self:custom.common.currentStage}
+  logRetentionInDays: 30
+  tracing:
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - ${file(../../shared/serverless.common.yml):lambdaPolicyXRay}
+    - ${file(../../shared/serverless.common.yml):lambdaLogGroup}
+  endpointType: REGIONAL
+  apiGateway:
+    metrics: true
+  logs:
+    restApi: true
+package:
+  individually: True
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-pseudo-parameters
+  - serverless-prune-plugin
+custom:
+  common: ${file(../../shared/serverless.common.yml):common}
+  serverless-iam-roles-per-function:
+    defaultInherit: true
+functions:
+  - ${file(./functions/api/function.yml)}
+resources:
+  - Outputs:
+      ApiGatewayRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:custom.common.currentStage}-MultipleBeRestApiId
+      ApiGatewayRestApiRootResourceId:
+        Value:
+          Fn::GetAtt: [ ApiGatewayRestApi, RootResourceId ]
+        Export:
+          Name: ${self:custom.common.currentStage}-MultipleBeRestApiRootResourceId
